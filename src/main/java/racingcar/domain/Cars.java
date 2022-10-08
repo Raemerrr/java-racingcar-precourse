@@ -14,11 +14,29 @@ public class Cars {
     }
 
     public PlayResult play() {
-        List<CarDTO> result = new ArrayList<>();
         for (final Car car : cars) {
             car.racing(movingStrategy);
-            result.add(new CarDTO(car.getName().getValue(), car.getDistance().intValue()));
+        }
+        return new PlayResult(toDtos());
+    }
+
+    public PlayResult winners() {
+        List<CarDTO> result = new ArrayList<>();
+        List<CarDTO> dtos = toDtos();
+        dtos.sort((a, b) -> b.getDistance().compareTo(a.getDistance()));
+        int maxDistance = dtos.get(0).getDistance();
+        while (!dtos.isEmpty() && dtos.get(0).getDistance() == maxDistance) {
+            result.add(dtos.get(0));
+            dtos.remove(0);
         }
         return new PlayResult(result);
+    }
+
+    private List<CarDTO> toDtos() {
+        List<CarDTO> result = new ArrayList<>();
+        for (final Car car : cars) {
+            result.add(new CarDTO(car.getName().getValue(), car.getDistance().intValue()));
+        }
+        return result;
     }
 }

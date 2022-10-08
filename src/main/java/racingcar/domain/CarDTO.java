@@ -2,9 +2,9 @@ package racingcar.domain;
 
 public class CarDTO {
     private final String name;
-    private final int distance;
+    private final Integer distance;
 
-    public CarDTO(final String name, final int distance) {
+    public CarDTO(final String name, final Integer distance) {
         this.name = name;
         this.distance = distance;
     }
@@ -13,7 +13,7 @@ public class CarDTO {
         return name;
     }
 
-    public int getDistance() {
+    public Integer getDistance() {
         return distance;
     }
 }
